@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official News & Blog - ShambaFest</title>
+    <style>
+        .blog-container { max-width: 1300px; margin: 40px auto; padding: 0 20px; }
+        .blog-hero { text-align: center; margin-bottom: 60px; }
+        .blog-hero h1 { font-size: 2.6rem; color: var(--primary-dark); }
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
+        .blog-post-card { background: white; border: 1px solid #e2e8e4; border-radius: 8px; overflow: hidden; text-decoration: none; color: inherit; }
+        .post-thumbnail { width: 100%; height: 220px; object-fit: cover; }
+        .post-body { padding: 25px; }
+        .post-date { font-size: 0.8rem; font-weight: 700; color: var(--accent-red); text-transform: uppercase; }
+        .post-title { font-size: 1.3rem; margin: 10px 0; color: var(--primary-dark); font-weight: 700; }
+        .post-excerpt { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+    </style>
+</head>
+<body>
+
+    <nav class="top-navbar">
+        <div class="nav-container">
+            <a href="/" class="brand-identity">Shamba<span>Fest</span></a>
+            <ul class="nav-menu">
+                <li><a href="/upcoming-events">Events</a></li>
+                <li><a href="/blog" class="active">Blog</a></li>
+                <li><a href="/help">Help</a></li>
+                <li><a href="/sell-your-tickets" class="btn-action">Sell Your Event</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="blog-container">
+        <div class="blog-hero">
+            <h1>Inside ShambaFest</h1>
+            <p>Your ultimate destination hub for entertainment culture, event coverage, and ticketing tips.</p>
+        </div>
+
+        <div class="blog-grid">
+            <article class="blog-post-card">
+                <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600" class="post-thumbnail" alt="Story graphic">
+                <div class="post-body">
+                    <span class="post-date">June 7, 2026</span>
+                    <h3 class="post-title">Mastering Clean Custom Marketplace Architecture</h3>
+                    <p class="post-excerpt">Discover how we restructured our platform to offer premium ticketing directories and seamless user flows.</p>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="platform-footer">
+        <div class="footer-bottom">&copy; 2026 ShambaFest Blog. All rights reserved.</div>
+    </footer>
+</body>
+</html>
