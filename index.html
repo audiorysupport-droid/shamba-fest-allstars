@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shamba Fest - Experience the Roots</title>
+    <title>Shamba Fest Marketplace - Buy & Sell Tickets</title>
     <style>
-        /* --- CSS VARIABLES & RESET --- */
+        /* --- GLOBAL MODERN CLASSIC BRANDING --- */
         :root {
-            --primary: #1b4332;       /* Classic Forest Green */
-            --primary-light: #2d6a4f; /* Lighter Green */
-            --accent: #d4af37;        /* Classic Gold */
-            --accent-dark: #aa8c2c;   /* Deep Gold */
-            --dark: #112211;          /* Near Black */
-            --light: #f9f6f0;         /* Cream / Off-white */
-            --white: #ffffff;
-            --font-serif: 'Playfair Display', Georgia, serif;
-            --font-sans: 'Montserrat', sans-serif;
+            --primary-dark: #0f2214;  /* Premium deep green forest hue */
+            --accent-red: #c92a2a;    /* High-conversion focal red button accent */
+            --accent-gold: #d4af37;   /* Classic gold highlight tint */
+            --bg-light: #fdfdfd;       /* Soft clean white container backdrop */
+            --bg-neutral: #f4f6f5;    /* Light gray dividing elements tint */
+            --text-dark: #1e2922;     /* Crisp high-contrast charcoal body color */
+            --text-muted: #627267;    /* Subtle descriptive metadata text tint */
+            --font-sans: 'Montserrat', system-ui, -apple-system, sans-serif;
         }
 
         * {
@@ -26,491 +25,410 @@
 
         body {
             font-family: var(--font-sans);
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.5;
         }
 
-        /* --- TYPOGRAPHY --- */
-        h1, h2, h3, .classic-serif {
-            font-family: var(--font-serif);
-            font-weight: 700;
-        }
-
-        /* --- UTILITIES --- */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--dark);
-            padding: 12px 30px;
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            color: var(--white);
-            border-color: var(--accent);
-        }
-
-        /* --- HEADER & NAVIGATION --- */
-        header {
-            background-color: var(--primary);
-            padding: 15px 0;
+        /* --- NAVIGATION LAYOUT --- */
+        .top-navbar {
+            background: #ffffff;
+            border-bottom: 1px solid var(--bg-neutral);
             position: sticky;
             top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
 
-        nav {
+        .nav-container {
+            max-width: 1300px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 15px 20px;
         }
 
-        .logo-container {
+        .brand-identity {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             text-decoration: none;
-            color: var(--white);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
         }
 
-        .logo-text {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            letter-spacing: 1px;
+        .brand-identity span {
+            color: var(--accent-gold);
         }
 
-        .logo-text span {
-            color: var(--accent);
-        }
-
-        nav ul {
+        .nav-menu {
             display: flex;
+            align-items: center;
             list-style: none;
-            gap: 30px;
-            align-items: center;
+            gap: 25px;
         }
 
-        nav ul a {
-            color: var(--white);
+        .nav-menu a {
             text-decoration: none;
+            color: var(--text-dark);
             font-weight: 500;
             font-size: 0.95rem;
-            transition: color 0.3s;
+            transition: color 0.2s ease;
         }
 
-        nav ul a:hover {
-            color: var(--accent);
+        .nav-menu a:hover {
+            color: var(--accent-red);
         }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            background: linear-gradient(rgba(27, 67, 50, 0.85), rgba(17, 34, 17, 0.9)), 
-                        url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=1920') center/cover no-repeat;
-            color: var(--white);
-            padding: 140px 0;
-            text-align: center;
-            border-bottom: 5px solid var(--accent);
+        .btn-action {
+            background-color: var(--accent-red);
+            color: #ffffff !important;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600 !important;
+            transition: opacity 0.2s;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            letter-spacing: 2px;
+        .btn-action:hover {
+            opacity: 0.9;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            font-family: var(--font-serif);
-            font-style: italic;
-            color: #e0e0e0;
-        }
-
-        /* --- PASSES / TICKETS SECTION --- */
-        .tickets-section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            color: var(--primary);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--accent);
-            margin: 10px auto 0;
-        }
-
-        .ticket-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .ticket-card {
-            background: var(--white);
-            border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 8px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ticket-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
-        }
-
-        .ticket-card.featured {
-            border: 2px solid var(--accent);
-        }
-
-        .badge {
-            position: absolute;
-            top: 20px;
-            right: -35px;
-            background-color: var(--accent);
-            color: var(--dark);
-            transform: rotate(45deg);
-            padding: 5px 40px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .ticket-card h3 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        .price {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 25px;
-        }
-
-        .price span {
-            font-size: 1rem;
-            color: #666;
-            font-weight: 400;
-        }
-
-        .ticket-features {
-            list-style: none;
-            margin-bottom: 35px;
-            text-align: left;
-        }
-
-        .ticket-features li {
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.95rem;
-            color: #555;
-        }
-
-        .ticket-features li::before {
-            content: '✓';
-            color: var(--primary-light);
-            margin-right: 10px;
-            font-weight: bold;
-        }
-
-        /* --- BOOKING MODAL --- */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(17, 34, 17, 0.8);
-            z-index: 1000;
+        /* --- HERO & SEARCH CONSOLE --- */
+        .hero-banner {
+            background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1472653431158-6364773b2a56?q=80&w=1600') center/cover no-repeat;
+            padding: 100px 20px;
+            display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .modal-content {
-            background-color: var(--white);
-            padding: 40px;
-            border-radius: 8px;
+        .search-widget {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             max-width: 500px;
-            width: 90%;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            width: 100%;
         }
 
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 1.5rem;
+        .search-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--bg-neutral);
+        }
+
+        .tab-item {
+            padding: 10px 20px;
             cursor: pointer;
-            color: #666;
-            transition: color 0.3s;
-        }
-
-        .close-modal:hover {
-            color: var(--dark);
-        }
-
-        .modal h2 {
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
             font-weight: 600;
             font-size: 0.9rem;
+            color: var(--text-muted);
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
         }
 
-        .form-group input, .form-group select {
+        .tab-item.active {
+            color: var(--accent-red);
+            border-bottom-color: var(--accent-red);
+        }
+
+        .input-box {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-box input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: inherit;
+            padding: 14px 14px 14px 40px;
+            border: 1px solid #dcdfdc;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
         }
 
-        .total-display {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin: 20px 0;
-            padding: 15px;
-            background-color: #f4ece1;
-            border-left: 4px solid var(--accent);
+        .input-box::before {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .search-events-icon::before { content: "🔍"; }
+        .search-location-icon::before { content: "📍"; }
+
+        .btn-search-submit {
+            width: 100%;
+            background-color: var(--accent-red);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* --- FEATURED EVENTS GRID --- */
+        .showcase-section {
+            max-width: 1300px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-header {
             display: flex;
             justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
         }
 
-        /* --- FOOTER --- */
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 40px 0;
-            text-align: center;
+        .section-header h2 {
+            font-size: 1.6rem;
+            color: var(--primary-dark);
+        }
+
+        .section-header a {
+            color: var(--accent-red);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--bg-neutral);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-banner {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-details {
+            padding: 20px;
+        }
+
+        .event-timestamp {
+            color: var(--accent-red);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .event-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .event-venue {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .card-footer-pricing {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--bg-neutral);
+            padding-top: 12px;
+        }
+
+        .price-tag {
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .price-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        /* --- GLOBAL PLATFORM FOOTER --- */
+        .platform-footer {
+            background-color: var(--bg-neutral);
+            padding: 60px 20px 30px;
+            margin-top: 100px;
+            border-top: 1px solid #e2e8e4;
+        }
+
+        .footer-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #d3ded6;
+        }
+
+        .footer-col h4 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul a {
+            text-decoration: none;
+            color: var(--text-muted);
             font-size: 0.9rem;
-            border-top: 4px solid var(--primary);
+            transition: color 0.2s;
         }
 
-        footer p {
-            color: #aaa;
+        .footer-col ul a:hover {
+            color: var(--accent-red);
+        }
+
+        .footer-bottom {
+            max-width: 1300px;
+            margin: 30px auto 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
     </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <div class="container nav">
-            <a href="#" class="logo-container">
-                <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="45" stroke="#d4af37" stroke-width="2" fill="#1b4332"/>
-                    <path d="M50 15 V25 M50 75 V85 M15 50 H25 M75 50 H85" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M50 75 C50 50 25 45 25 30 C25 15 50 20 50 40 C50 20 75 15 75 30 C75 45 50 50 50 75 Z" fill="#d4af37"/>
-                    <path d="M50 40 V75" stroke="#1b4332" stroke-width="2"/>
+    <nav class="top-navbar">
+        <div class="nav-container">
+            <a href="/" class="brand-identity">
+                <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" fill="#0f2214"/>
+                    <path d="M50 25 C35 45 35 60 50 75 C65 60 65 45 50 25 Z" fill="#d4af37"/>
                 </svg>
-                <div class="logo-text">Shamba<span>Fest</span></div>
+                Shamba<span>Fest</span>
             </a>
-            <ul>
-                <li><a href="#tickets">Passes</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#tickets" class="btn" style="padding: 8px 20px; font-size: 0.8rem;">Buy Tickets</a></li>
+            <ul class="nav-menu">
+                <li><a href="/upcoming-events">Events</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/help">Help</a></li>
+                <li><a href="/login" id="authLink">Log In</a></li>
+                <li><a href="/sell-your-tickets" class="btn-action">Sell Your Event</a></li>
             </ul>
         </div>
-    </header>
+    </nav>
 
-    <section class="hero">
-        <div class="container">
-            <h1>Celebrate The Rhythm of the Land</h1>
-            <p>Join us for the ultimate premium celebration of music, culture, and heritage at Shamba Fest.</p>
-            <a href="#tickets" class="btn">Secure Your Pass</a>
-        </div>
-    </section>
-
-    <section id="tickets" class="tickets-section">
-        <div class="container">
-            <h2 class="section-title">Festival Passes</h2>
-            
-            <div class="ticket-grid">
-                <div class="ticket-card">
-                    <h3>Regular Pass</h3>
-                    <div class="price">KSh 2,500<span>/ per person</span></div>
-                    <ul class="ticket-features">
-                        <li>General Admission Entry</li>
-                        <li>Access to Main Stage & Food Court</li>
-                        <li>Standard Parking Access</li>
-                        <li>Complimentary Welcome Drink</li>
-                    </ul>
-                    <button class="btn open-booking" data-type="Regular" data-price="2500">Book Pass</button>
-                </div>
-
-                <div class="ticket-card featured">
-                    <div class="badge">Popular</div>
-                    <h3>VIP Pass</h3>
-                    <div class="price">KSh 6,000<span>/ per person</span></div>
-                    <ul class="ticket-features">
-                        <li>Front Row Stage Access</li>
-                        <li>Exclusive VIP Lounge & Bar</li>
-                        <li>Premium Reserved Parking</li>
-                        <li>Shamba Fest Official Merchandise</li>
-                    </ul>
-                    <button class="btn open-booking" data-type="VIP" data-price="6000">Book VIP</button>
-                </div>
-
-                <div class="ticket-card">
-                    <h3>Squad Pass</h3>
-                    <div class="price">KSh 10,000<span>/ 5 People Group</span></div>
-                    <ul class="ticket-features">
-                        <li>Admission for exactly 5 persons</li>
-                        <li>Dedicated Group Entry Lane</li>
-                        <li>1x Complimentary Custom Platter</li>
-                        <li>Shared Memory Group Photo Session</li>
-                    </ul>
-                    <button class="btn open-booking" data-type="Squad" data-price="10000">Book Squad</button>
-                </div>
+    <section class="hero-banner">
+        <div class="search-widget">
+            <div class="search-tabs">
+                <div class="tab-item active">Events</div>
+                <div class="tab-item" onclick="location.href='/upcoming-events'">Flights</div>
+                <div class="tab-item" onclick="location.href='/upcoming-events'">Holidays</div>
             </div>
-        </div>
-    </section>
-
-    <div class="modal" id="bookingModal">
-        <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
-            <h2>Checkout Details</h2>
-            <form id="ticketForm" onsubmit="handleCheckout(event)">
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" required placeholder="John Doe">
+            <form action="/upcoming-events" method="GET">
+                <div class="input-box search-events-icon">
+                    <input type="text" placeholder="Events name...">
                 </div>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" required placeholder="johndoe@example.com">
+                <div class="input-box search-location-icon">
+                    <input type="text" placeholder="City or Venue...">
                 </div>
-                <div class="form-group">
-                    <label for="ticketType">Pass Type</label>
-                    <select id="ticketType" disabled>
-                        <option value="Regular">Regular Pass - KSh 2,500</option>
-                        <option value="VIP">VIP Pass - KSh 6,000</option>
-                        <option value="Squad">Squad Pass - KSh 10,000</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="ticketQuantity">Quantity</label>
-                    <input type="number" id="ticketQuantity" min="1" value="1" required>
-                </div>
-
-                <div class="total-display">
-                    <span>Total Due:</span>
-                    <span id="totalAmount">KSh 0</span>
-                </div>
-
-                <button type="submit" class="btn" style="width: 100%;">Confirm & Pay</button>
+                <button type="submit" class="btn-search-submit">Find Your Event</button>
             </form>
         </div>
-    </div>
+    </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Shamba Fest. All Rights Reserved.</p>
-            <p style="font-size: 0.8rem; margin-top: 10px; color: #666;">Crafted for classic experiences.</p>
+    <main class="showcase-section">
+        <div class="section-header">
+            <h2>Upcoming Events</h2>
+            <a href="/upcoming-events">View All &rsaquo;</a>
+        </div>
+
+        <div class="events-grid" id="eventsDisplayContainer">
+            <a href="/upcoming-events" class="event-card">
+                <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600" class="card-banner" alt="Event">
+                <div class="card-details">
+                    <span class="event-timestamp">Fri 26 Jun 2026 03:00 PM</span>
+                    <div class="event-title">Wine and Cheese: Premium Edition</div>
+                    <div class="event-venue">Rosslyn Square Luxury Mall, Nairobi</div>
+                    <div class="card-footer-pricing">
+                        <div>
+                            <span class="price-label">Starting</span>
+                            <span class="price-tag">KES 500</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </main>
+
+    <footer class="platform-footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="/upcoming-events">Events</a></li>
+                    <li><a href="/upcoming-events">Holiday Packages</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Using ShambaFest</h4>
+                <ul>
+                    <li><a href="/upcoming-events">Buy a Ticket</a></li>
+                    <li><a href="/sell-your-tickets">Sell Your Tickets</a></li>
+                    <li><a href="/login">Create a Merchant Account</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Quicklinks</h4>
+                <ul>
+                    <li><a href="/help">Support</a></li>
+                    <li><a href="/help">Privacy Policy</a></li>
+                    <li><a href="/contact">Terms & Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 ShambaFest, a product of Shamba Technologies Limited. All rights reserved.
         </div>
     </footer>
 
-    <script>
-        const modal = document.getElementById('bookingModal');
-        const closeModalBtn = document.getElementById('closeModal');
-        const openModalButtons = document.querySelectorAll('.open-booking');
-        
-        const ticketTypeSelect = document.getElementById('ticketType');
-        const ticketQuantityInput = document.getElementById('ticketQuantity');
-        const totalAmountDisplay = document.getElementById('totalAmount');
-
-        let currentTicketPrice = 0;
-
-        // Open Modal Setup
-        openModalButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const type = button.getAttribute('data-type');
-                const price = parseInt(button.getAttribute('data-price'));
-                
-                currentTicketPrice = price;
-                ticketTypeSelect.value = type;
-                ticketQuantityInput.value = 1;
-                
-                calculateTotal();
-                modal.style.display = 'flex';
-            });
-        });
-
-        // Close Modal Setup
-        closeModalBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
+    <script type="module">
+        // Basic configuration checks for structural authentication
+        window.addEventListener('DOMContentLoaded', () => {
+            const userSession = localStorage.getItem('userSessionActive');
+            if(userSession) {
+                document.getElementById('authLink').innerText = 'My Account';
+                document.getElementById('authLink').href = '/account/mytickets';
             }
         });
-
-        // Calculate Price Function
-        function calculateTotal() {
-            const quantity = parseInt(ticketQuantityInput.value) || 0;
-            const total = currentTicketPrice * quantity;
-            totalAmountDisplay.innerText = `KSh ${total.toLocaleString()}`;
-        }
-
-        ticketQuantityInput.addEventListener('input', calculateTotal);
-
-        // Handle Fake Checkout Actions
-        function handleCheckout(event) {
-            event.preventDefault();
-            const name = document.getElementById('fullName').value;
-            const email = document.getElementById('email').value;
-            
-            alert(`Thank you, ${name}! Your booking instructions have been sent to ${email}. Prepare for Shamba Fest!`);
-            modal.style.display = 'none';
-            document.getElementById('ticketForm').reset();
-        }
     </script>
 </body>
 </html>
