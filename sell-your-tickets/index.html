@@ -219,64 +219,55 @@
             background-color: #b22424;
         }
 
-        /* --- HOMEPAGE FOOTER STYLE (Verbatim from Screenshot 2026-06-07 125005_2.png) --- */
-        .site-footer {
-            background-color: var(--footer-bg);
-            border-top: 1px solid #eaeaea;
-            padding: 60px 20px 30px 20px;
-            margin-top: auto;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* --- GLOBAL PLATFORM FOOTER --- */
+        .platform-footer {
+            background-color: var(--bg-neutral);
+            padding: 60px 20px 30px;
+            margin-top: 100px;
+            border-top: 1px solid #e2e8e4;
         }
 
         .footer-grid {
+            max-width: 1300px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 40px;
-            padding-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #d3ded6;
         }
 
-        .footer-column h4 {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #000000;
-            margin-bottom: 22px;
+        .footer-col h4 {
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            font-size: 1rem;
         }
 
-        .footer-column ul {
+        .footer-col ul {
             list-style: none;
         }
 
-        .footer-column ul li {
-            margin-bottom: 12px;
+        .footer-col ul li {
+            margin-bottom: 10px;
         }
 
-        .footer-column ul li a {
+        .footer-col ul a {
             text-decoration: none;
-            color: #555555;
+            color: var(--text-muted);
             font-size: 0.9rem;
             transition: color 0.2s;
         }
 
-        .footer-column ul li a:hover {
-            color: var(--btn-red);
+        .footer-col ul a:hover {
+            color: var(--accent-red);
         }
 
-        .footer-divider {
-            border: 0;
-            height: 1px;
-            background-color: #e5e5e5;
-            margin-bottom: 25px;
-        }
-
-        .footer-bottom-text {
+        .footer-bottom {
+            max-width: 1300px;
+            margin: 30px auto 0;
             text-align: center;
             font-size: 0.85rem;
-            color: #777777;
-            line-height: 1.5;
+            color: var(--text-muted);
         }
     </style>
 </head>
