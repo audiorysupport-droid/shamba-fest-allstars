@@ -3,109 +3,410 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Merchant Listing - ShambaFest</title>
+    <title>Sell Your Tickets - ShambaFest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* --- HOMEPAGE MATCHING ROOT & GLOBAL STYLES --- */
         :root {
-            --primary-dark: #0f2214;
-            --accent-red: #c92a2a;
-            --bg-neutral: #f4f6f5;
-            --font-sans: 'Montserrat', sans-serif;
+            --brand-dark: #000000;
+            --brand-gold: #cca625;
+            --btn-red: #c92a2a;
+            --text-main: #1a1a1a;
+            --text-muted: #666666;
+            --footer-bg: #f8f9fa;
+            --body-bg: #f4f6f5;
         }
-        body {
-            font-family: var(--font-sans);
-            background: var(--bg-neutral);
+
+        * {
             margin: 0;
-            padding: 50px 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HOMEPAGE HEADER STYLE (Verbatim from Screenshot 2026-06-07 124943_2.jpg) --- */
+        .site-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+        }
+
+        /* Custom SVG Shamba icon mimicking the screenshot graphic */
+        .logo-icon {
+            width: 24px;
+            height: 30px;
+            background-color: #112613;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 25%;
+            left: 35%;
+            width: 7px;
+            height: 14px;
+            background-color: #cca625;
+            border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+        }
+
+        .brand-logo span {
+            color: var(--brand-gold);
+            margin-left: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--btn-red);
+        }
+
+        .btn-sell-event {
+            background-color: var(--btn-red);
+            color: #ffffff !important;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600 !important;
+            transition: background-color 0.2s;
+        }
+
+        .btn-sell-event:hover {
+            background-color: #b22424;
+        }
+
+        /* --- FORM CONTENT LAYER SECTION --- */
+        .main-content {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            padding: 60px 20px;
         }
-        .form-container {
+
+        .form-card {
             background: #ffffff;
-            max-width: 650px;
+            max-width: 680px;
             width: 100%;
             padding: 40px;
             border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
         }
-        h2 { font-size: 1.8rem; color: var(--primary-dark); margin-bottom: 10px; font-weight: 700; }
-        .instructions { font-size: 0.9rem; color: #556258; margin-bottom: 30px; border-left: 3px solid var(--accent-red); padding-left: 12px; line-height: 1.5; }
-        
-        .field-block { display: flex; flex-direction: column; margin-bottom: 20px; }
-        .field-block label { font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: var(--primary-dark); }
-        .field-block input, .field-block textarea { padding: 12px; border: 1px solid #dcdfdc; border-radius: 6px; font-family: inherit; font-size: 0.95rem; outline: none; }
-        .field-block input:focus, .field-block textarea:focus { border-color: var(--accent-red); }
-        
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        @media(max-width: 500px) { .form-row { grid-template-columns: 1fr; gap: 0; } }
-        
-        .btn-post { width: 100%; background: var(--accent-red); color: white; border: none; padding: 15px; font-weight: 700; border-radius: 6px; cursor: pointer; text-transform: uppercase; font-size: 1rem; margin-top: 10px; letter-spacing: 0.5px; }
+
+        .form-card h1 {
+            font-size: 1.8rem;
+            color: #000000;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+
+        .info-notice-bar {
+            font-size: 0.9rem;
+            color: #444444;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            border-left: 3px solid var(--btn-red);
+            padding-left: 14px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 22px;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #000000;
+        }
+
+        .input-group input, 
+        .input-group textarea {
+            padding: 14px;
+            border: 1px solid #dcdfdc;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            color: var(--text-main);
+            background-color: #ffffff;
+        }
+
+        .input-group input::placeholder,
+        .input-group textarea::placeholder {
+            color: #a0a0a0;
+        }
+
+        .input-group input:focus, 
+        .input-group textarea:focus {
+            border-color: #888888;
+        }
+
+        .dual-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 560px) {
+            .dual-columns {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+
+        .btn-submit-entry {
+            background-color: var(--btn-red);
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-top: 8px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-submit-entry:hover {
+            background-color: #b22424;
+        }
+
+        /* --- HOMEPAGE FOOTER STYLE (Verbatim from Screenshot 2026-06-07 125005_2.png) --- */
+        .site-footer {
+            background-color: var(--footer-bg);
+            border-top: 1px solid #eaeaea;
+            padding: 60px 20px 30px 20px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            padding-bottom: 50px;
+        }
+
+        .footer-column h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 22px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            text-decoration: none;
+            color: #555555;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--btn-red);
+        }
+
+        .footer-divider {
+            border: 0;
+            height: 1px;
+            background-color: #e5e5e5;
+            margin-bottom: 25px;
+        }
+
+        .footer-bottom-text {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #777777;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
 
-    <div class="form-container">
-        <h2>List Your Event to Sell Tickets</h2>
-        <div class="instructions">
-            Provide your event details below. Event images should preferably be square dimensions (e.g., 330px by 320px) for consistent grid rendering across the upcoming events catalog.
+    <!-- HOMEPAGE HEADER SECTION -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="brand-logo">
+                <div class="logo-icon"></div>
+                Shamba<span>Fest</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/events/upcoming">Events</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/help">Help</a></li>
+                <li><a href="/login">Log In</a></li>
+                <li><a href="/sell-your-tickets" class="btn-sell-event">Sell Your Event</a></li>
+            </ul>
         </div>
+    </header>
 
-        <form id="eventUploadForm">
-            <div class="field-block">
-                <label>Event Name</label>
-                <input type="text" id="eventName" required placeholder="e.g. Mombasa Seafood Festival">
+    <!-- FORM ENTRY SECTION -->
+    <main class="main-content">
+        <div class="form-card">
+            <h1>List Your Event to Sell Tickets</h1>
+            <div class="info-notice-bar">
+                Provide your event details below. Event images should preferably be square dimensions (e.g., 330px by 320px) for consistent grid rendering.
             </div>
-            <div class="field-block">
-                <label>Event Description</label>
-                <textarea id="eventDesc" rows="4" required placeholder="Describe the vibe, line up, and details..."></textarea>
-            </div>
-            <div class="form-row">
-                <div class="field-block">
-                    <label>Event Date & Time</label>
-                    <input type="datetime-local" id="eventDateTime" required>
-                </div>
-                <div class="field-block">
-                    <label>Ticket Base Price (KES)</label>
-                    <input type="number" id="eventPrice" min="0" placeholder="0 for Free" required>
-                </div>
-            </div>
-            <div class="field-block">
-                <label>Event Venue / Location Address</label>
-                <input type="text" id="eventVenue" required placeholder="e.g. Mama Ngina Waterfront, Mombasa">
-            </div>
-            <button type="submit" class="btn-post">Publish Event Entry</button>
-        </form>
-    </div>
 
+            <form id="listingForm">
+                <div class="input-group">
+                    <label>Event Name</label>
+                    <input type="text" id="eventName" required placeholder="e.g. Mombasa Seafood Festival">
+                </div>
+
+                <div class="input-group">
+                    <label>Event Description</label>
+                    <textarea id="eventDescription" rows="5" required placeholder="Describe the vibe, line up, and details..."></textarea>
+                </div>
+
+                <div class="dual-columns">
+                    <div class="input-group">
+                        <label>Event Date & Time</label>
+                        <input type="datetime-local" id="eventDate" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Ticket Base Price (KES)</label>
+                        <input type="number" id="eventPrice" min="0" required placeholder="0 for Free">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Event Venue / Location Address</label>
+                    <input type="text" id="eventVenue" required placeholder="e.g. Mama Ngina Waterfront, Mombasa">
+                </div>
+
+                <button type="submit" class="btn-submit-entry">Publish Event Entry</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- HOMEPAGE FOOTER SECTION -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/events/upcoming">Events</a></li>
+                        <li><a href="/holiday-packages">Holiday Packages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Using ShambaFest</h4>
+                    <ul>
+                        <li><a href="/events/upcoming">Buy a Ticket</a></li>
+                        <li><a href="/sell-your-tickets">Sell Your Tickets</a></li>
+                        <li><a href="/register">Create a Merchant Account</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Quicklinks</h4>
+                    <ul>
+                        <li><a href="/help">Support</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="footer-divider">
+            
+            <div class="footer-bottom-text">
+                &copy; 2026 ShambaFest, a product of Shamba Technologies Limited. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SUBMISSION HANDLER -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+        // Provide your active configuration params here
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
             projectId: "YOUR_PROJECT_ID"
         };
+        
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        document.getElementById('eventUploadForm').addEventListener('submit', async (e) => {
+        document.getElementById('listingForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const payload = {
+            
+            const eventPayload = {
                 title: document.getElementById('eventName').value,
-                description: document.getElementById('eventDesc').value,
-                dateTime: document.getElementById('eventDateTime').value,
-                price: parseFloat(document.getElementById('eventPrice').value),
+                description: document.getElementById('eventDescription').value,
+                dateTime: document.getElementById('eventDate').value,
+                price: parseFloat(document.getElementById('eventPrice').value) || 0,
                 venue: document.getElementById('eventVenue').value,
-                createdTime: new Date().toISOString()
+                timestamp: new Date().toISOString()
             };
+
             try {
-                await addDoc(collection(db, "events"), payload);
-                alert("Success! Your event listing request is online.");
-                window.location.href = '/upcoming-events';
+                await addDoc(collection(db, "events"), eventPayload);
+                alert("Excellent! Your event setup form has been submitted and registered.");
+                window.location.href = "/events/upcoming";
             } catch (error) {
-                alert("Error saving record: " + error.message);
+                alert("Error connecting to live server: " + error.message);
             }
         });
     </script>
