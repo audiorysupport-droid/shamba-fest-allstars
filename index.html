@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shamba Fest - Experience the Roots</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #1b4332;       /* Classic Forest Green */
+            --primary-light: #2d6a4f; /* Lighter Green */
+            --accent: #d4af37;        /* Classic Gold */
+            --accent-dark: #aa8c2c;   /* Deep Gold */
+            --dark: #112211;          /* Near Black */
+            --light: #f9f6f0;         /* Cream / Off-white */
+            --white: #ffffff;
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, .classic-serif {
+            font-family: var(--font-serif);
+            font-weight: 700;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--accent);
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background-color: var(--primary);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--white);
+        }
+
+        .logo-text {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+
+        .logo-text span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            align-items: center;
+        }
+
+        nav ul a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        nav ul a:hover {
+            color: var(--accent);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: linear-gradient(rgba(27, 67, 50, 0.85), rgba(17, 34, 17, 0.9)), 
+                        url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=1920') center/cover no-repeat;
+            color: var(--white);
+            padding: 140px 0;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: var(--font-serif);
+            font-style: italic;
+            color: #e0e0e0;
+        }
+
+        /* --- PASSES / TICKETS SECTION --- */
+        .tickets-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 10px auto 0;
+        }
+
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .ticket-card {
+            background: var(--white);
+            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ticket-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        .ticket-card.featured {
+            border: 2px solid var(--accent);
+        }
+
+        .badge {
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background-color: var(--accent);
+            color: var(--dark);
+            transform: rotate(45deg);
+            padding: 5px 40px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .ticket-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 25px;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .ticket-features {
+            list-style: none;
+            margin-bottom: 35px;
+            text-align: left;
+        }
+
+        .ticket-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .ticket-features li::before {
+            content: '✓';
+            color: var(--primary-light);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* --- BOOKING MODAL --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(17, 34, 17, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+
+        .total-display {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f4ece1;
+            border-left: 4px solid var(--accent);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+            border-top: 4px solid var(--primary);
+        }
+
+        footer p {
+            color: #aaa;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container nav">
+            <a href="#" class="logo-container">
+                <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" stroke="#d4af37" stroke-width="2" fill="#1b4332"/>
+                    <path d="M50 15 V25 M50 75 V85 M15 50 H25 M75 50 H85" stroke="#d4af37" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M50 75 C50 50 25 45 25 30 C25 15 50 20 50 40 C50 20 75 15 75 30 C75 45 50 50 50 75 Z" fill="#d4af37"/>
+                    <path d="M50 40 V75" stroke="#1b4332" stroke-width="2"/>
+                </svg>
+                <div class="logo-text">Shamba<span>Fest</span></div>
+            </a>
+            <ul>
+                <li><a href="#tickets">Passes</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#tickets" class="btn" style="padding: 8px 20px; font-size: 0.8rem;">Buy Tickets</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Celebrate The Rhythm of the Land</h1>
+            <p>Join us for the ultimate premium celebration of music, culture, and heritage at Shamba Fest.</p>
+            <a href="#tickets" class="btn">Secure Your Pass</a>
+        </div>
+    </section>
+
+    <section id="tickets" class="tickets-section">
+        <div class="container">
+            <h2 class="section-title">Festival Passes</h2>
+            
+            <div class="ticket-grid">
+                <div class="ticket-card">
+                    <h3>Regular Pass</h3>
+                    <div class="price">KSh 2,500<span>/ per person</span></div>
+                    <ul class="ticket-features">
+                        <li>General Admission Entry</li>
+                        <li>Access to Main Stage & Food Court</li>
+                        <li>Standard Parking Access</li>
+                        <li>Complimentary Welcome Drink</li>
+                    </ul>
+                    <button class="btn open-booking" data-type="Regular" data-price="2500">Book Pass</button>
+                </div>
+
+                <div class="ticket-card featured">
+                    <div class="badge">Popular</div>
+                    <h3>VIP Pass</h3>
+                    <div class="price">KSh 6,000<span>/ per person</span></div>
+                    <ul class="ticket-features">
+                        <li>Front Row Stage Access</li>
+                        <li>Exclusive VIP Lounge & Bar</li>
+                        <li>Premium Reserved Parking</li>
+                        <li>Shamba Fest Official Merchandise</li>
+                    </ul>
+                    <button class="btn open-booking" data-type="VIP" data-price="6000">Book VIP</button>
+                </div>
+
+                <div class="ticket-card">
+                    <h3>Squad Pass</h3>
+                    <div class="price">KSh 10,000<span>/ 5 People Group</span></div>
+                    <ul class="ticket-features">
+                        <li>Admission for exactly 5 persons</li>
+                        <li>Dedicated Group Entry Lane</li>
+                        <li>1x Complimentary Custom Platter</li>
+                        <li>Shared Memory Group Photo Session</li>
+                    </ul>
+                    <button class="btn open-booking" data-type="Squad" data-price="10000">Book Squad</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2>Checkout Details</h2>
+            <form id="ticketForm" onsubmit="handleCheckout(event)">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="johndoe@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="ticketType">Pass Type</label>
+                    <select id="ticketType" disabled>
+                        <option value="Regular">Regular Pass - KSh 2,500</option>
+                        <option value="VIP">VIP Pass - KSh 6,000</option>
+                        <option value="Squad">Squad Pass - KSh 10,000</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ticketQuantity">Quantity</label>
+                    <input type="number" id="ticketQuantity" min="1" value="1" required>
+                </div>
+
+                <div class="total-display">
+                    <span>Total Due:</span>
+                    <span id="totalAmount">KSh 0</span>
+                </div>
+
+                <button type="submit" class="btn" style="width: 100%;">Confirm & Pay</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Shamba Fest. All Rights Reserved.</p>
+            <p style="font-size: 0.8rem; margin-top: 10px; color: #666;">Crafted for classic experiences.</p>
+        </div>
+    </footer>
+
+    <script>
+        const modal = document.getElementById('bookingModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const openModalButtons = document.querySelectorAll('.open-booking');
+        
+        const ticketTypeSelect = document.getElementById('ticketType');
+        const ticketQuantityInput = document.getElementById('ticketQuantity');
+        const totalAmountDisplay = document.getElementById('totalAmount');
+
+        let currentTicketPrice = 0;
+
+        // Open Modal Setup
+        openModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const type = button.getAttribute('data-type');
+                const price = parseInt(button.getAttribute('data-price'));
+                
+                currentTicketPrice = price;
+                ticketTypeSelect.value = type;
+                ticketQuantityInput.value = 1;
+                
+                calculateTotal();
+                modal.style.display = 'flex';
+            });
+        });
+
+        // Close Modal Setup
+        closeModalBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Calculate Price Function
+        function calculateTotal() {
+            const quantity = parseInt(ticketQuantityInput.value) || 0;
+            const total = currentTicketPrice * quantity;
+            totalAmountDisplay.innerText = `KSh ${total.toLocaleString()}`;
+        }
+
+        ticketQuantityInput.addEventListener('input', calculateTotal);
+
+        // Handle Fake Checkout Actions
+        function handleCheckout(event) {
+            event.preventDefault();
+            const name = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            
+            alert(`Thank you, ${name}! Your booking instructions have been sent to ${email}. Prepare for Shamba Fest!`);
+            modal.style.display = 'none';
+            document.getElementById('ticketForm').reset();
+        }
+    </script>
+</body>
+</html>
