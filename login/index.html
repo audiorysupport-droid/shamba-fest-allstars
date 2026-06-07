@@ -3,121 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In - ShambaFest</title>
+    <title>Log In to Your Account - ShambaFest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* --- HOMEPAGE MATCHING ROOT & GLOBAL STYLES --- */
         :root {
-            --primary-dark: #0f2214;
-            --accent-red: #c92a2a;
-            --bg-neutral: #f4f6f5;
-            --font-sans: 'Montserrat', sans-serif;
+            --brand-dark: #000000;
+            --brand-gold: #cca625;
+            --btn-red: #c92a2a;
+            --text-main: #1a1a1a;
+            --text-muted: #666666;
+            --footer-bg: #f8f9fa;
+            --body-bg: #f4f6f5;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: var(--font-sans);
-            background: var(--bg-neutral);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HOMEPAGE HEADER STYLE (Verbatim from Screenshot 2026-06-07 124943_2.jpg) --- */
+        .site-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+        }
+
+        /* Custom SVG Shamba icon mimicking the screenshot graphic */
+        .logo-icon {
+            width: 24px;
+            height: 30px;
+            background-color: #112613;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 25%;
+            left: 35%;
+            width: 7px;
+            height: 14px;
+            background-color: #cca625;
+            border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+        }
+
+        .brand-logo span {
+            color: var(--brand-gold);
+            margin-left: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--btn-red);
+        }
+
+        .btn-sell-event {
+            background-color: var(--btn-red);
+            color: #ffffff !important;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600 !important;
+            transition: background-color 0.2s;
+        }
+
+        .btn-sell-event:hover {
+            background-color: #b22424;
+        }
+
+        /* --- LOGIN CENTERED CARD LAYOUT --- */
+        .main-content {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            margin: 0;
+            padding: 60px 20px;
         }
+
         .auth-card {
             background: #ffffff;
+            max-width: 440px;
+            width: 100%;
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            max-width: 400px;
-            width: 90%;
+            border-radius: 8px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+        }
+
+        .auth-card h1 {
+            font-size: 1.8rem;
+            color: #000000;
+            margin-bottom: 8px;
+            font-weight: 700;
             text-align: center;
         }
-        .auth-card h2 {
-            margin-bottom: 25px;
-            color: var(--primary-dark);
+
+        .auth-subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 30px;
         }
-        .form-field {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .form-field label {
-            display: block;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-        .form-field input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #dcdfdc;
-            border-radius: 6px;
-            outline: none;
-        }
-        .btn-submit {
-            width: 100%;
-            background: var(--accent-red);
-            color: #fff;
-            border: none;
-            padding: 14px;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        .switch-prompt {
-            margin-top: 20px;
-            font-size: 0.85rem;
-        }
-        .switch-prompt a {
-            color: var(--accent-red);
+
+        .auth-subtitle a {
+            color: var(--btn-red);
             text-decoration: none;
             font-weight: 600;
+        }
+
+        .auth-subtitle a:hover {
+            text-decoration: underline;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #000000;
+        }
+
+        .input-group input {
+            padding: 14px;
+            border: 1px solid #dcdfdc;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            color: var(--text-main);
+            background-color: #ffffff;
+        }
+
+        .input-group input::placeholder {
+            color: #a0a0a0;
+        }
+
+        .input-group input:focus {
+            border-color: #888888;
+        }
+
+        .form-actions-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            font-size: 0.85rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            color: #444444;
+        }
+
+        .forgot-password-link {
+            color: #555555;
+            text-decoration: none;
+        }
+
+        .forgot-password-link:hover {
+            color: var(--btn-red);
+            text-decoration: underline;
+        }
+
+        .btn-auth-submit {
+            background-color: var(--btn-red);
+            color: #ffffff;
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-auth-submit:hover {
+            background-color: #b22424;
+        }
+
+        /* --- HOMEPAGE FOOTER STYLE (Verbatim from Screenshot 2026-06-07 125005_2.png) --- */
+        .site-footer {
+            background-color: var(--footer-bg);
+            border-top: 1px solid #eaeaea;
+            padding: 60px 20px 30px 20px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            padding-bottom: 50px;
+        }
+
+        .footer-column h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 22px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            text-decoration: none;
+            color: #555555;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--btn-red);
+        }
+
+        .footer-divider {
+            border: 0;
+            height: 1px;
+            background-color: #e5e5e5;
+            margin-bottom: 25px;
+        }
+
+        .footer-bottom-text {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #777777;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
-    <div class="auth-card">
-        <h2>Welcome Back</h2>
-        <form id="loginForm">
-            <div class="form-field">
-                <label>Email Address</label>
-                <input type="email" id="email" required placeholder="name@domain.com">
-            </div>
-            <div class="form-field">
-                <label>Password</label>
-                <input type="password" id="password" required placeholder="••••••••">
-            </div>
-            <button type="submit" class="btn-submit">Sign In</button>
-        </form>
-        <p class="switch-prompt">Don't have an account? <a href="/register">Register Here</a></p>
-    </div>
+    <!-- HOMEPAGE HEADER SECTION -->
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="brand-logo">
+                <div class="logo-icon"></div>
+                Shamba<span>Fest</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/events/upcoming/">Events</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/help/">Help</a></li>
+                <li><a href="/login/">Log In</a></li>
+                <li><a href="/sell-your-tickets/" class="btn-sell-event">Sell Your Event</a></li>
+            </ul>
+        </div>
+    </header>
 
+    <!-- LOGIN CARD SECTION -->
+    <main class="main-content">
+        <div class="auth-card">
+            <h1>Log In to ShambaFest</h1>
+            <p class="auth-subtitle">New to the platform? <a href="/signup/">Sign Up</a></p>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" id="loginEmail" required placeholder="name@example.com">
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="loginPassword" required placeholder="Enter your account password">
+                </div>
+
+                <div class="form-actions-row">
+                    <label class="remember-me">
+                        <input type="checkbox" id="rememberMe"> Remember me
+                    </label>
+                    <a href="/forgot-password/" class="forgot-password-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn-auth-submit">Access Account</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- HOMEPAGE FOOTER SECTION -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/events/upcoming/">Events</a></li>
+                        <li><a href="/holiday-packages/">Holiday Packages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Using ShambaFest</h4>
+                    <ul>
+                        <li><a href="/events/upcoming/">Buy a Ticket</a></li>
+                        <li><a href="/sell-your-tickets/">Sell Your Tickets</a></li>
+                        <li><a href="/signup/">Create a Merchant Account</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Quicklinks</h4>
+                    <ul>
+                        <li><a href="/help/">Support</a></li>
+                        <li><a href="/privacy/">Privacy Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="footer-divider">
+            
+            <div class="footer-bottom-text">
+                &copy; 2026 ShambaFest, a product of Shamba Technologies Limited. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE AUTHENTICATION HANDLER -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // Replace these settings with your official Firebase Web App configuration credentials
+        // Provide your active configuration params here
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            projectId: "YOUR_PROJECT_ID"
         };
-
+        
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
 
             try {
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                localStorage.setItem('userSessionActive', userCredential.user.uid);
-                window.location.href = '/account/mytickets';
+                await signInWithEmailAndPassword(auth, email, password);
+                alert("Welcome back!");
+                window.location.href = "/events/upcoming/";
             } catch (error) {
-                alert("Authentication Failed: " + error.message);
+                alert("Login credentials mismatch: " + error.message);
             }
         });
     </script>
