@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In - ShambaFest</title>
+    <style>
+        :root {
+            --primary-dark: #0f2214;
+            --accent-red: #c92a2a;
+            --bg-neutral: #f4f6f5;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-neutral);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .auth-card {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        .auth-card h2 {
+            margin-bottom: 25px;
+            color: var(--primary-dark);
+        }
+        .form-field {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-field label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .form-field input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dcdfdc;
+            border-radius: 6px;
+            outline: none;
+        }
+        .btn-submit {
+            width: 100%;
+            background: var(--accent-red);
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .switch-prompt {
+            margin-top: 20px;
+            font-size: 0.85rem;
+        }
+        .switch-prompt a {
+            color: var(--accent-red);
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-card">
+        <h2>Welcome Back</h2>
+        <form id="loginForm">
+            <div class="form-field">
+                <label>Email Address</label>
+                <input type="email" id="email" required placeholder="name@domain.com">
+            </div>
+            <div class="form-field">
+                <label>Password</label>
+                <input type="password" id="password" required placeholder="••••••••">
+            </div>
+            <button type="submit" class="btn-submit">Sign In</button>
+        </form>
+        <p class="switch-prompt">Don't have an account? <a href="/register">Register Here</a></p>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Replace these settings with your official Firebase Web App configuration credentials
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                localStorage.setItem('userSessionActive', userCredential.user.uid);
+                window.location.href = '/account/mytickets';
+            } catch (error) {
+                alert("Authentication Failed: " + error.message);
+            }
+        });
+    </script>
+</body>
+</html>
