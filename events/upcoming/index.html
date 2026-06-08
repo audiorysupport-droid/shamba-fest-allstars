@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upcoming Events Directory - ShambaFest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- HOMEPAGE MATCHING ROOT & GLOBAL STYLES --- */
+        :root {
+            --brand-dark: #000000;
+            --brand-gold: #cca625;
+            --btn-red: #c92a2a;
+            --text-main: #1a1a1a;
+            --text-muted: #666666;
+            --footer-bg: #f8f9fa;
+            --body-bg: #f4f6f5;
+            --sub-nav-bg: #fff5f5;
+            --sub-nav-border: #fbd5d5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--body-bg);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- HOMEPAGE HEADER STYLE (Verbatim from Screenshot) --- */
+        .site-header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e5e5;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--brand-dark);
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 30px;
+            background-color: #112613;
+            border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+            position: relative;
+            display: inline-block;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 25%;
+            left: 35%;
+            width: 7px;
+            height: 14px;
+            background-color: #cca625;
+            border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+        }
+
+        .brand-logo span {
+            color: var(--brand-gold);
+            margin-left: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--btn-red);
+        }
+
+        .btn-sell-event {
+            background-color: var(--btn-red);
+            color: #ffffff !important;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600 !important;
+            transition: background-color 0.2s;
+        }
+
+        .btn-sell-event:hover {
+            background-color: #b22424;
+        }
+
+        /* --- SUB-NAVIGATION CATEGORY BAR --- */
+        .sub-navbar {
+            background-color: var(--sub-nav-bg);
+            border-bottom: 1px solid var(--sub-nav-border);
+            padding: 14px 20px;
+        }
+
+        .sub-nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 32px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .sub-nav-container::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for clean UI view */
+        }
+
+        .sub-nav-link {
+            text-decoration: none;
+            color: #555555;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            padding-bottom: 4px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .sub-nav-link.active, .sub-nav-link:hover {
+            color: var(--btn-red);
+            border-bottom-color: var(--btn-red);
+        }
+
+        /* --- DIRECTORY CONTENT GRID AREA --- */
+        .main-content {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 30px 20px 60px 20px;
+        }
+
+        .breadcrumb-trail {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb-trail a {
+            text-decoration: none;
+            color: var(--btn-red);
+            font-weight: 600;
+        }
+
+        .breadcrumb-trail span {
+            color: var(--text-muted);
+        }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 30px;
+        }
+
+        .event-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+            border: 1px solid #eaeaea;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+        }
+
+        .event-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        .card-image-wrapper {
+            width: 100%;
+            height: 270px; /* Forces uniform square look matching 330x320 guidelines layout */
+            background-color: #eaeaea;
+            overflow: hidden;
+        }
+
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-details {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .event-datetime {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--btn-red);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+
+        .event-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 2.8rem; /* Keeps layout items row aligned perfectly */
+        }
+
+        .event-venue {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-pricing-footer {
+            border-top: 1px solid #f0f0f0;
+            padding-top: 14px;
+            margin-top: auto;
+        }
+
+        .price-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .price-amount {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #000000;
+        }
+
+        /* Loading Spinner element style */
+        .loader-notice {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px 0;
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* --- HOMEPAGE FOOTER STYLE (Verbatim from Screenshot) --- */
+        .site-footer {
+            background-color: var(--footer-bg);
+            border-top: 1px solid #eaeaea;
+            padding: 60px 20px 30px 20px;
+            margin-top: auto;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            padding-bottom: 50px;
+        }
+
+        .footer-column h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 22px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            text-decoration: none;
+            color: #555555;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--btn-red);
+        }
+
+        .footer-divider {
+            border: 0;
+            height: 1px;
+            background-color: #e5e5e5;
+            margin-bottom: 25px;
+        }
+
+        .footer-bottom-text {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #777777;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-container">
+            <a href="/" class="brand-logo">
+                <div class="logo-icon"></div>
+                Shamba<span>Fest</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/events/upcoming/" style="color: var(--btn-red);">Events</a></li>
+                <li><a href="/blog/">Blog</a></li>
+                <li><a href="/help/">Help</a></li>
+                <li><a href="/login/">Log In</a></li>
+                <li><a href="/sell-your-tickets/" class="btn-sell-event">Sell Your Event</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="sub-navbar">
+        <div class="sub-nav-container">
+            <div class="sub-nav-link active">All Events</div>
+            <div class="sub-nav-link">Featured Events</div>
+            <div class="sub-nav-link">Weekend's Events</div>
+            <div class="sub-nav-link">Trending Events</div>
+            <div class="sub-nav-link">Free Events</div>
+            <div class="sub-nav-link">Price Drops</div>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="breadcrumb-trail">
+            <a href="/">shambafestallstars.2bd.net/</a> &rsaquo; <span>Events</span>
+        </div>
+
+        <div class="events-grid" id="eventsContainer">
+            <div class="loader-notice" id="loadingNotice">Fetching active event listings from cloud database...</div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="/events/upcoming/">Events</a></li>
+                        <li><a href="/holiday-packages/">Holiday Packages</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Using ShambaFest</h4>
+                    <ul>
+                        <li><a href="/events/upcoming/">Buy a Ticket</a></li>
+                        <li><a href="/sell-your-tickets/">Sell Your Tickets</a></li>
+                        <li><a href="/signup/">Create a Merchant Account</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Quicklinks</h4>
+                    <ul>
+                        <li><a href="/help/">Support</a></li>
+                        <li><a href="/privacy/">Privacy Policy</a></li>
+                        <li><a href="/terms/">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="footer-divider">
+            
+            <div class="footer-bottom-text">
+                &copy; 2026 ShambaFest, a product of Shamba Technologies Limited. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // Provide your valid Firebase configurations parameters context
+        const firebaseConfig = {
+            projectId: "YOUR_PROJECT_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function fetchMarketplaceEvents() {
+            const container = document.getElementById('eventsContainer');
+            const notice = document.getElementById('loadingNotice');
+
+            try {
+                const snapshot = await getDocs(collection(db, "events"));
+                
+                // Clear the loader spinner notice once data completes fetching
+                if (snapshot.size > 0) {
+                    container.innerHTML = "";
+                } else {
+                    notice.innerText = "No upcoming events currently listed on the marketplace hub.";
+                    return;
+                }
+
+                snapshot.forEach((doc) => {
+                    const eventData = doc.data();
+                    
+                    // Format price rendering context logic strings
+                    const ticketPrice = eventData.price > 0 ? `Starting KES ${eventData.price.toLocaleString()}` : 'FREE';
+                    
+                    // Direct static placeholder image layout fallback if no flyer exists
+                    const flyerImage = eventData.imageUrl || 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=600';
+
+                    const cardHTML = `
+                        <a href="/events/?id=${doc.id}" class="event-card">
+                            <div class="card-image-wrapper">
+                                <img src="${flyerImage}" alt="Event Flyer">
+                            </div>
+                            <div class="card-details">
+                                <span class="event-datetime">${eventData.dateTime || 'Date TBA'}</span>
+                                <div class="event-title">${eventData.title}</div>
+                                <div class="event-venue">${eventData.venue}</div>
+                                <div class="card-pricing-footer">
+                                    <span class="price-label">Ticket Option</span>
+                                    <span class="price-amount">${ticketPrice}</span>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                    container.innerHTML += cardHTML;
+                });
+
+            } catch (error) {
+                console.error("Database connection failure log: ", error);
+                notice.innerText = "Error syncing with the events cloud grid. Please verify your connection setup.";
+            }
+        }
+
+        // Initialize loader cycle
+        fetchMarketplaceEvents();
+    </script>
+</body>
+</html>
